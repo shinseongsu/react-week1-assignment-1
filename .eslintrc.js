@@ -1,12 +1,11 @@
 module.exports = {
+  root: true,
   env: {
     browser: true,
-    es2021: true,
+    node: true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'airbnb',
-  ],
+  extends: ['plugin:react/recommended', 'airbnb', 'prettier'],
+  parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -14,9 +13,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-  ],
+  plugins: ['react', 'prettier', 'react-hooks'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -24,10 +21,14 @@ module.exports = {
     Feature: 'readonly',
     Scenario: 'readonly',
   },
+  ignorePatterns: ['build', 'dist', 'public'],
   settings: {
     react: {
       version: 'latest',
     },
   },
-  rules: {},
+  rules: {
+    'no-console': 'error',
+    'import/prefer-default-export': 'off',
+  },
 };
