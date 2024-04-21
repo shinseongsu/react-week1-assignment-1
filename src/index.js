@@ -1,5 +1,22 @@
 /* eslint-disable react/react-in-jsx-scope, react/jsx-filename-extension */
 /* @jsx createElement */
+const createElement = (tagName, props, ...children) => {
+  const tag = document.createElement(tagName);
+
+  Object.entries(props || {}).forEach(([key, value]) => {
+    tag[key.toLowerCase()] = value;
+  });
+
+  children.flat().forEach((child) => {
+    if (child instanceof Node) {
+      tag.appendChild(child);
+      return;
+    }
+    tag.appendChild(document.createTextNode(child));
+  });
+  return tag;
+};
+
 function render({ count }) {
   function handleNumberIncrementClick() {
     render({ count: count + 1 });
@@ -14,8 +31,10 @@ function render({ count }) {
         Hi
       </p>
 
+      <p className="count">({count})</p>
+
       <button type="button" onclick={handleNumberIncrementClick}>
-        Click me! {count}
+        Click me!
       </button>
       <div>
         {[1, 2, 3].map((i) => (
