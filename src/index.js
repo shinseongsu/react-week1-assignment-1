@@ -31,10 +31,8 @@ function render({ count }) {
         Hi
       </p>
 
-      <p className="count">({count})</p>
-
       <button type="button" onclick={handleNumberIncrementClick}>
-        Click me!
+        Click me! ({count})
       </button>
       <div>
         {[1, 2, 3].map((i) => (
